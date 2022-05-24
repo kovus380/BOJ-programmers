@@ -1,20 +1,16 @@
 #include <iostream>
 #include <algorithm>
-#include <vector>
 using namespace std;
-int main() {
-    int N, tmp;
-    vector<int> nums;
-    
+
+int main(){
+    int N;
     cin >> N;
-    
-    for(int i = 0 ; i < N ; i++) {
-        cin >> tmp;
-        nums.push_back(tmp);
+    vector<int> v(N);
+    for(int i = 0 ; i < N ; i++){
+        cin >> v[i];
     }
-    
-    sort(nums.begin(), nums.end());
-    for(int j = 0 ; j < N ; j++) {
-        cout << nums[j] << '\n';
+    sort(v.begin(), v.end());
+    for(int j = 0 ; j < N ; j++){
+        cout << v[j] << '\n';
     }
 }
