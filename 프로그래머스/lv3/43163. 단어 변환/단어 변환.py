@@ -1,21 +1,28 @@
 from collections import deque
 
 
-def solution(begin, target, words):
-    if target not in words:
-        return 0
-    q = deque()
-    q.append([begin])
+def get_adjacent(current, words):
+    for word in words:
+        
+        count = 0
+        for c, w in zip(current, word):
+            if c != w:
+                count += 1
 
-    while q:
-        v = q.popleft()
-        if v[-1] == target:
-            return(len(v) - 1)
-        for word in words:
-            new = v[:]
-            if word in new:
-                continue
-            new.append(word)
-            if (sum([new[-1][i] != new[-2][i] for i in range(len(begin))])) == 1:
-                q.append(new)
-    return 0
+        if count == 1:
+            yield word
+
+
+def solution(begin, target, words):
+    dist = {begin: 0}
+    queue = deque([begin])
+
+    while queue:
+        current = queue.popleft()
+
+        for next_word in get_adjacent(current, words):
+            if next_word not in dist:
+                dist[next_word] = dist[current] + 1
+                queue.append(next_word)
+
+    return dist.get(target, 0)
