@@ -1,3 +1,5 @@
+answer = 0
+
 N, C = map(int, input().split())
 
 routers = []
@@ -7,7 +9,6 @@ for _ in range(N):
 
 routers.sort()
 
-answer = 0
 left, right = 1, routers[-1] - routers[0]
 
 while left <= right:
@@ -22,9 +23,10 @@ while left <= right:
 
     if using >= C:
         left = mid + 1
+        answer = mid
 
     else :
         right = mid - 1
 
 
-print(right)
+print(answer)
