@@ -1,21 +1,31 @@
-from collections import defaultdict
+from collections import defaultdict, deque
 
-computer = [0] * (int(input()) + 1)
-line_num = int(input())
+ver_cnt = int(input())
+node_cnt = int(input())
 
-line = defaultdict(list)
+graph = defaultdict(list)
 
-for _ in range(line_num):
-    a, b = map(int, input().split())
-    line[a] += [b]
-    line[b] += [a]
+for i in range(node_cnt):
+    s, e = map(int, input().split())
+    graph[s] += [e]
+    graph[e] += [s]
 
-visit = line[1].copy()
 
-while visit:
-    v = visit.pop()
-    if not computer[v]:
-        computer[v] = 1
-        visit += line[v]
+visited = [0] * (ver_cnt + 1)
 
-print(sum(computer) - 1)
+need_visited = deque([1])
+visited[1] = 1
+
+answer = 0
+
+while need_visited:
+    v = need_visited.popleft()
+
+    answer += 1
+
+    for next_visit in graph[v]:
+        if visited[next_visit] == 0:
+            need_visited.append(next_visit)
+            visited[next_visit] = 1
+
+print(answer - 1)
