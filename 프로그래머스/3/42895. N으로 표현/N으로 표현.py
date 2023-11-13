@@ -1,14 +1,10 @@
 from collections import defaultdict
 
 def solution(N, number):
-    answer = 0
+
     ddict = defaultdict(list)
     ddict[1] += [N]
     cnt = 1
-    
-    before = [N]
-    next_visit = []
-    visited = [0] * 32000
     
     if N == number:
         return 1
@@ -26,7 +22,5 @@ def solution(N, number):
         
         if number in ddict[cnt]:
             return cnt
-        
-        # ddict[cnt] = list(set(ddict[cnt]))
         
     return -1
