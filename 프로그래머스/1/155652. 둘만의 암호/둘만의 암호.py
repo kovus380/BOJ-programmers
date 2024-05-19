@@ -1,5 +1,3 @@
-import string
-
 def solution(s, skip, index):
 
     answer = ''
